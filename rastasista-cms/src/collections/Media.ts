@@ -1,16 +1,15 @@
-import type { CollectionConfig } from 'payload'
+// src/collections/Media.ts
+import { CollectionConfig } from 'payload/types';
 
 export const Media: CollectionConfig = {
   slug: 'media',
-  access: {
-    read: () => true,
-  },
+  upload: true,
   fields: [
     {
       name: 'alt',
       type: 'text',
       required: true,
+      label: 'Alt Text',
     },
   ],
-  upload: true,
-}
+};

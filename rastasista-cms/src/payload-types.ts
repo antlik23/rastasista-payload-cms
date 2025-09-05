@@ -69,6 +69,9 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    hairstyles: Hairstyle;
+    'hairstyle-categories': HairstyleCategory;
+    news: News;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -77,6 +80,9 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    hairstyles: HairstylesSelect<false> | HairstylesSelect<true>;
+    'hairstyle-categories': HairstyleCategoriesSelect<false> | HairstyleCategoriesSelect<true>;
+    news: NewsSelect<false> | NewsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -84,8 +90,12 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    contact: Contact;
+  };
+  globalsSelect: {
+    contact: ContactSelect<false> | ContactSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -158,6 +168,56 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hairstyles".
+ */
+export interface Hairstyle {
+  id: string;
+  name: string;
+  description?: string | null;
+  /**
+   * Select one or more categories for this hairstyle.
+   */
+  categories?: (string | HairstyleCategory)[] | null;
+  gallery?:
+    | {
+        image: string | Media;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hairstyle-categories".
+ */
+export interface HairstyleCategory {
+  id: string;
+  name: string;
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news".
+ */
+export interface News {
+  id: string;
+  title: string;
+  content?: string | null;
+  gallery?:
+    | {
+        image: string | Media;
+        id?: string | null;
+      }[]
+    | null;
+  publishedDate: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -170,6 +230,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'hairstyles';
+        value: string | Hairstyle;
+      } | null)
+    | ({
+        relationTo: 'hairstyle-categories';
+        value: string | HairstyleCategory;
+      } | null)
+    | ({
+        relationTo: 'news';
+        value: string | News;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -255,6 +327,50 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hairstyles_select".
+ */
+export interface HairstylesSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  categories?: T;
+  gallery?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hairstyle-categories_select".
+ */
+export interface HairstyleCategoriesSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news_select".
+ */
+export interface NewsSelect<T extends boolean = true> {
+  title?: T;
+  content?: T;
+  gallery?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
+  publishedDate?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
@@ -284,6 +400,30 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact".
+ */
+export interface Contact {
+  id: string;
+  email: string;
+  phoneNumber?: string | null;
+  address?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact_select".
+ */
+export interface ContactSelect<T extends boolean = true> {
+  email?: T;
+  phoneNumber?: T;
+  address?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

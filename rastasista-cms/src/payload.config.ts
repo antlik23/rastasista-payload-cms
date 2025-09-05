@@ -7,6 +7,11 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
+
+import { Hairstyles } from './collections/Hairstyles'
+import { HairstyleCategories } from './collections/HairstyleCategories'
+import { News } from './collections/News'
+import { Contact } from './globals/Contact'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 
@@ -20,7 +25,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, Hairstyles, HairstyleCategories, News],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -34,4 +39,5 @@ export default buildConfig({
     payloadCloudPlugin(),
     // storage-adapter-placeholder
   ],
+  globals: [Contact],
 })
