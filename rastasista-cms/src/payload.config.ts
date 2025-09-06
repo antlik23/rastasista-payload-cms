@@ -18,6 +18,8 @@ import { Media } from './collections/Media'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
+
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -38,6 +40,13 @@ export default buildConfig({
   plugins: [
     payloadCloudPlugin(),
     // storage-adapter-placeholder
+      vercelBlobStorage({
+      collections: {
+        media: true,
+      },
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+      // You can define a custom `path` here if you want
+    }),
   ],
   globals: [Contact],
 })
