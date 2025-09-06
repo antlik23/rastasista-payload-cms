@@ -30,7 +30,7 @@ export default buildConfig({
 
   cors: [
     'http://localhost:3001',
-    'https://my-rastasista-cms.vercel.app',
+    'https://rastasista-payload-cms.vercel.app',
     // Allow requests from your Nuxt frontend
   ],
   collections: [Users, Media, Hairstyles, HairstyleCategories, News],
