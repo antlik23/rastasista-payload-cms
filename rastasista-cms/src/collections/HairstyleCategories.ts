@@ -3,6 +3,9 @@ import { seoFields } from '../fields/seo';
 
 export const HairstyleCategories: CollectionConfig = {
     slug: 'hairstyle-categories',
+    access: {
+        read: () => true,
+    },
     admin: {
         useAsTitle: 'name',
     },

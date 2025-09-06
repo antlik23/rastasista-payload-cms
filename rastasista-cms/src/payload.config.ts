@@ -27,6 +27,10 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
+
+  cors: [
+    'http://localhost:3001', // Allow requests from your Nuxt frontend
+  ],
   collections: [Users, Media, Hairstyles, HairstyleCategories, News],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

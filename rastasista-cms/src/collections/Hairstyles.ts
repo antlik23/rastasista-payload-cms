@@ -2,6 +2,9 @@ import { CollectionConfig } from 'payload';
 
 export const Hairstyles: CollectionConfig = {
     slug: 'hairstyles',
+    access: {
+        read: () => true,
+    },
     fields: [
         {
             name: 'name',
