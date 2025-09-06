@@ -195,6 +195,14 @@ export interface HairstyleCategory {
   id: string;
   name: string;
   description?: string | null;
+  slug: string;
+  /**
+   * Minimum resolution is 400x400 pixels.
+   */
+  mainImage: string | Media;
+  metaTitle?: string | null;
+  metaDescription?: string | null;
+  ogImage?: (string | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -349,6 +357,11 @@ export interface HairstylesSelect<T extends boolean = true> {
 export interface HairstyleCategoriesSelect<T extends boolean = true> {
   name?: T;
   description?: T;
+  slug?: T;
+  mainImage?: T;
+  metaTitle?: T;
+  metaDescription?: T;
+  ogImage?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -410,6 +423,8 @@ export interface Contact {
   email: string;
   phoneNumber?: string | null;
   address?: string | null;
+  facebookUrl?: string | null;
+  instagramUrl?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -421,6 +436,8 @@ export interface ContactSelect<T extends boolean = true> {
   email?: T;
   phoneNumber?: T;
   address?: T;
+  facebookUrl?: T;
+  instagramUrl?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

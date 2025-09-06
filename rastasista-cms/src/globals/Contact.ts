@@ -21,5 +21,15 @@ export const Contact: GlobalConfig = {
       type: 'text',
       label: 'Studio Address',
     },
+    {
+      name: 'facebookUrl',
+      type: 'text',
+      label: 'Facebook URL',
+    },
+    {
+      name: 'instagramUrl',
+      type: 'text',
+      label: 'Instagram URL',
+    },
   ],
 };
